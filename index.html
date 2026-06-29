@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMD CBS BIOS Emulator (UMAF) - Lenovo ThinkCentre M715s</title>
+  <meta name="description"
+    content="Visual web emulator for AMD CBS BIOS configuration menu (Universal AMD Form Browser / UMAF) on Lenovo ThinkCentre M715s PC.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="bios-screen" class="bios-screen">
+
+    <!-- Верхняя панель (Header) -->
+    <header class="bios-header">
+
+      <!-- Панель навигационного пути (хлебные крошки / текущая форма) -->
+      <div class="bios-path-bar" id="path-bar">
+        AMD CBS
+      </div>
+    </header>
+
+    <!-- Главная секция (Split 70/30) -->
+    <div class="bios-content-area">
+
+      <!-- Левая колонка (70%): Список меню -->
+      <section class="bios-menu-panel" id="menu-panel">
+        <ul class="bios-menu-list" id="menu-list" tabIndex="0">
+          <!-- Заполняется динамически из JavaScript -->
+        </ul>
+      </section>
+      <!-- Правая колонка (30%): Описание (Help) -->
+      <section class="bios-help-panel" id="help-panel">
+        <div class="help-content">
+          <div class="help-text-body" id="help-text">
+            Выберите пункт меню для просмотра описания.
+          </div>
+        </div>
+        <div class="help-footer" id="help-offset-container">
+          <span class="offset-label">Offset:</span>
+          <span class="offset-value" id="help-offset">N/A</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Нижняя панель (Footer) -->
+    <footer class="bios-footer">
+      <div class="footer-legend">
+        <span class="legend-item"><span class="key">↑↓</span>=Move Highlight</span>
+        <span class="legend-item"><span class="key">Enter</span>=Select Entry</span>
+        <span class="legend-item"><span class="key">Esc</span>=Exit</span>
+        <span class="legend-item"><span class="key">F9</span>=Load Defaults</span>
+        <span class="legend-item"><span class="key">F10</span>=Save & Exit</span>
+      </div>
+    </footer>
+
+    <!-- Кастомное модальное окно ONEOF (Выбор вариантов) -->
+    <div id="oneof-modal" class="bios-modal hidden">
+      <div class="modal-box">
+        <div class="modal-header" id="oneof-title"></div>
+        <ul class="modal-options-list" id="oneof-options-list">
+          <!-- Опции заполняются динамически -->
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- Кастомное модальное окно NUMERIC (Ввод числа) -->
+    <div id="numeric-modal" class="bios-modal hidden">
+      <div class="modal-box small-modal">
+        <div class="modal-body">
+          <p class="numeric-help" id="numeric-help-text">Введите новое значение (Десятичное или 16-ричное):</p>
+          <div class="input-row">
+            <input type="text" id="numeric-input" autocomplete="off" spellcheck="false">
+          </div>
+          <p class="numeric-error hidden" id="numeric-error-msg">Недопустимое значение!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Окно сохранения (Save Progress Toast/Modal) -->
+    <div id="save-modal" class="bios-modal hidden">
+      <div class="modal-box mini-modal text-center">
+        <div class="modal-header">Saving Configuration</div>
+        <div class="modal-body">
+          <p>Writing settings to CMOS NVRAM...</p>
+          <div class="progress-bar">
+            <div class="progress-fill" id="save-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="bios_menu.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+
+</html>
